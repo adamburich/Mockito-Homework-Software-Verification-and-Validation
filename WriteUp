@@ -1,0 +1,8 @@
+I opted to use the first method discussed in class - Client now accepts a ServerConnection in its constructor.
+This allows us to create a mock server connection, pass it to our client, and perform mock tests on it.  After
+doing this I commented out the chunk of code in Client.requestFile that initializes a ServerConnection (since we
+already have one).  This approach seemed the simplest to me and in implementation I can say that it did seem that way.
+
+Client.java contains comments indicating refactoring that has been done.
+
+Tests have labels with the text requirement as well as the requirements number on the assignment readme.

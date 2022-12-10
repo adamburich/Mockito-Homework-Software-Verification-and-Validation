@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    // Guava for contracts
+    implementation 'com.google.guava:guava:31.0-jre'
+
+    // jqwik for property-based testing
+    testImplementation "net.jqwik:jqwik:1.5.6"
+
+    // Hamcrest matchers
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    
+    // JUnit for tests
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
+
+    // Mockito inline mocking
+    //testCompile "org.mockito:mockito-inline:+"
+    testImplementation "org.mockito:mockito-core:3.+"
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'jqwik', 'junit-jupiter'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+	exceptionFormat "short"
+    }
+}
+compileTestJava {
+	options.compilerArgs += '-parameters'
+	options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    // Enable assertions (-ea) for tests
+    enableAssertions = true
+}
